@@ -1,0 +1,18 @@
+{% extends "accounts/layout.html" %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_field  %}
+{% load static %}
+
+{% block content %}
+<br><br>
+
+<form action="" method="post">
+    {% csrf_token %}
+    {% for field in form %}
+      <div class="form-group">
+        {{ field | as_crispy_field }}
+      </div>
+     {% endfor %}
+    <input type="submit" class="btn btn-primary" value="가입하기"/>
+</form>
+{% endblock %}

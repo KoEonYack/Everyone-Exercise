@@ -1,0 +1,6 @@
+Pillow
+django-bootstrap4
+django-crispy-forms
+pillow django-imagekit
+folium
+googlemaps

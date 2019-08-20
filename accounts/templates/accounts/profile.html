@@ -1,0 +1,8 @@
+{% extends "accounts/layout.html" %}
+
+
+{% block content %}
+    <h2>{{ user }}'s profile</h2>
+    {{ user.profile.bio | default:"empty"  }}
+
+{% endblock %}

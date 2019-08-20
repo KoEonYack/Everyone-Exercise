@@ -1,0 +1,43 @@
+{% extends "blog/layout.html" %}
+
+{% block content %}
+    <br>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message.message }}<br>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-5">함께 운동해요</h1>
+        <p class="lead">함께 운동하면 즐거움은 커집니다!</p>
+      </div>
+    </div>
+    <table class="table table-hover table-bordered">
+        <tbody>
+        <tr>
+            <th>번호</th>
+            <th>글 제목</th>
+            <th>작성 일자</th>
+            <th>조회수</th>
+        </tr>
+            {% for post in post_list %}
+                <tr>
+                    <td> {{ post.pk }}</td>
+                    <td>
+                        <a href="{% url "blog:post_detail" post.pk %}">
+                            {{ post.title }}
+                        </a>
+                    </td>
+                    <td> {{ post.created_at | date:"Y-m-d D"}}</td>
+                    <td> {{ post.count }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url "blog:post_new" %}" class="btn btn-primary pull-right" >글 작성</a>
+    <br><br><br>
+{% endblock %}

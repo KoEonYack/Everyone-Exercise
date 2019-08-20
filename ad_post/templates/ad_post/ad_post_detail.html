@@ -1,0 +1,77 @@
+{% extends "ad_post/layout.html" %}
+{% load bootstrap4 %}
+{% load crispy_forms_field %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <br><br>
+
+    <!-- message -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message.message }}<br>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <h2>{{ ad_post.title }}</h2>
+    <hr>
+        <!-- 콘텐츠 -->
+        {% if ad_post.photo %}
+            <img src="{{ ad_post.photo.url }}" style="width:100%"/>
+            <img src = "{{ ad_post.image_thumbnail.url }}">
+        {% endif %}
+        {{ ad_post.content | linebreaks }}
+    <hr/>
+        <a href="{% url "ad_post:post_list" %}" class="btn btn-primary" >목록으로</a>
+        {% if ad_post.author == user %}
+            <a href="{% url "ad_post:post_edit" ad_post.pk %}" class="btn btn-info right">수정</a>
+            <a href="#"
+               data-toggle="modal" data-target="#exampleModal"
+               class="btn btn-danger float-right">삭제</a>
+        {% endif %}
+    <hr/>
+
+    <!-- comment list -->
+    {% for comment in ad_post.ad_comment_set.all %}
+        <span> <small>{{ comment.author }} | {{ comment.created_at }} </small></span>
+        <br>
+        {{ comment.message }}
+        <br>
+        <hr/>
+    {% endfor %}
+
+    <!-- comment input form -->
+    <form action="{% url "ad_post:comment_new" ad_post.pk %}" method="POST">
+        {% csrf_token %}
+        {{ comment_form.message | as_crispy_field }}
+        {# form.message | as_crispy_field #}
+        <input type="submit" class="btn btn-primary" value="덧글 남기기" />
+    </form>
+    <br><br>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="padding-top: 8px; padding-bottom: 8px">
+        <i class="material-icons" style="margin-top: 5px">info</i>
+        <h5 class="modal-title" id="exampleModalLabel">계정 관리</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        정말로 게시글을 삭제할까요?
+      </div>
+      <div class="modal-footer" style="padding-top: 11px; padding-bottom: 8px">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+          <button type="button" class="btn btn-primary">
+              <a href="{% url "ad_post:post_remove" ad_post.pk %}" style='padding: 0rem 0rem; color:white'>삭제</a>
+          </button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

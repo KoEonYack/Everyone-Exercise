@@ -1,0 +1,133 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>국민의 운동</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static "sticky-footer.css" %}" >
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="{% url "root" %}">
+      <img src="{% static "logo_menu.png" %}" width="30" height="30" class="d-inline-block align-top" alt="">
+      국민의 운동
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+
+<!-- Category -->
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active"> <!-- 활성 : nav-item active -->
+        <a class="nav-link" href="{% url "blog:post_list" %}">함께 운동해요<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url "ad_post:post_list" %}">우리 지역 행사</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">[구현중]우리지역운동시설</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">[구현중]나의 Bio상태 보기</a>
+      </li>
+    </ul>
+
+    <!-- Auth design -->
+    <ul class="navbar-nav navbar-right">
+    {% if user.is_authenticated %}
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url "profile" %}"}> {{ user }}</a>
+      </li>
+     <li class="nav-item active" >
+        <a class="nav-link" data-toggle="modal" data-target="#LogoutModal" href="{% url "logout" %}?next={{ request.path }}" >로그아웃</a>
+      </li>
+    {% else %}
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url "signup" %}">회원가입</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url "login" %}?next={{ request.path }}">로그인</a>
+      </li>
+    {% endif %}
+    </ul>
+  </div>
+</nav>
+<!-- END OF MENU -->
+
+<!--
+    <h1>
+        <a href="{% url "root" %}">AskDjango Blog</a>
+    </h1>
+
+    {% if user.is_authenticated %}
+        <a href="{% url "profile" %}"}> {{ user }}</a>
+        <a href="{% url "logout" %}?next={{ request.path }}" onclick="return confirm('정말 로그아웃 하시겠습니까?');">로그아웃</a>
+    {% else %}
+        <a href="{% url "signup" %}">회원가입</a>
+        <a href="{% url "login" %}?next={{ request.path }}">로그인</a>
+    {% endif %}
+    <hr/>
+-->
+
+<!--
+<main class="container" role="main">
+<h1 class="mt-5">HEAD 테스트</h1> <br>
+</main>
+-->
+<div class="container">
+<div class="row">
+<div class="col-xl-12">
+    {% block content %}
+    {% endblock %}
+</div>
+</div>
+</div>
+
+<!-- footer -->
+<footer class="footer">
+  <div class="container text-center">
+    <span class="text-muted">
+        &copy; Copyright 2019 제6회 개발보안 경진대회.
+        공개키와 비공개팀
+    </span>
+  </div>
+</footer>
+
+
+<!-- Modal -->
+<div class="modal fade" id="LogoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="padding-top: 8px; padding-bottom: 8px">
+          <i class="material-icons" style="margin-top: 4px">lock</i>
+        <h5 class="modal-title" id="exampleModalLabel">
+             계정 관리
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        정말로 로그아웃 하시겠습니까?
+      </div>
+      <div class="modal-footer" style="padding-top: 11px; padding-bottom: 8px">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+          <button type="button" class="btn btn-primary">
+              <a href="{% url "logout" %}?next={{ request.path }}" style='padding: 0rem 0rem; color:white'>로그아웃</a>
+          </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    {% block extra_bottom %}
+    {% endblock %}
+</body>
+</html>

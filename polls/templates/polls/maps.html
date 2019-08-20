@@ -1,0 +1,151 @@
+{% extends "polls/layout.html" %}
+{% load crispy_forms_field %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block content %}
+<br><br>
+<div id ="info" style="display:none">
+    {{ information.id }}$
+    {{ information.name }}$
+    {{ information.address }}$
+    {{ information.post_number}}$
+    {{ information.number }}$
+    {{ information.introduce }}$
+    {{ information.homepage}}
+</div>
+
+<div>
+  <ul>
+      <li><b>운동 시설 이름</b> : {{ information.name }}</li>
+      <li><b>주소</b> : {{ information.address }}</li>
+      <li><b>우편 번호</b> : {{ information.post_number}}</li>
+      <li><b>전화번호</b> : {{ information.number }}</li>
+      <li><b>간략한 소개</b> : {{ information.introduce }}</li>
+      <li><b>홈페이지 : </b><a href="{{information.homepage}}">{{information.homepage}}</a></li>
+  </ul>
+</div>
+
+<div id="map" style="width: 100%; height: 400px;"></div>
+<hr/>
+
+<!-- comment list -->
+{% for comment in information.map_comment_set.all %}
+    <span> <small>{{ comment.author }} | {{ comment.created_at }} </small></span>
+    <br>
+    {{ comment.message }}
+    <br>
+    <hr/>
+{% endfor %}
+
+<hr/>
+<!-- comment input form -->
+<form action="{% url "polls:comment_new" information.id %}" method="POST">
+    {% csrf_token %}
+    {{ comment_form.message | as_crispy_field }}
+    <input type="submit" class="btn btn-primary" value="리뷰 남기기" />
+</form>
+
+<br><br>
+
+
+<br><br>
+{% endblock %}
+
+{% block extra_bottom %}
+    <script src="http://maps.google.com/maps/api/js?key=AIzaSyAOW3dUIVqUhDOH-a26cZ8dqwO_E3gKrkQ"
+            type="text/javascript"></script>
+    <script type="text/javascript">
+  function initialize(){
+      let map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 12,
+        center: new google.maps.LatLng(37.549012, 126.988546),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      });
+
+      let infowindow = new google.maps.InfoWindow();
+      var total_info_list = [] //모든 정보 담은 리스트
+
+      total_info_list = document.getElementById("info").innerHTML; //내부 텍스트만 빼내기
+
+      var list = [];
+      var id = "";
+      var name = "";
+      var address = "";
+      var post_number = "";
+      var number = "";
+      var information_ = "";
+      var homepage = "";
+
+      list = (total_info_list.split('$')); //--> 이름별로 정보 1차로 쪼갬 --> 밑에 이름,주소,우편번호,번호,정보, 홈페이지 별로 다시 담기
+
+      id = list[0];
+      name= list[1];
+      address = list[2];
+      post_number = list[3];
+      number = list[4];
+      information_ = list[5];
+      homepage = list[6];
+      //end for p && information별로 list 저장
+
+      console.log("id :"+id)
+      console.log("name :"+name)
+      console.log("address :"+address)
+      console.log("post_number :" + post_number)
+      console.log("number :" + number)
+      console.log("information :"+information_)
+      console.log("homepage :"+homepage)
+
+      ///////////////////////////////////////////geocode/////////////////////////////////////////////////
+      let locations = []; //위도 경도 저장을 위한 location array 선언//..
+      let geocoder = new google.maps.Geocoder(); //주소로 위도 경도 계산위한 geocoder
+      let faddr_lat; //위도
+      let faddr_lng; //경도
+      let marker;
+      let k;
+
+      geocoder.geocode( { 'address': address }, function(results, status) {
+        console.log("ok")
+        if (status == google.maps.GeocoderStatus.OK) {
+          faddr_lat = results[0].geometry.location.lat(); //위도
+          faddr_lng = results[0].geometry.location.lng(); //경도
+          locations[0] = faddr_lat;
+          locations[1] = faddr_lng;
+          map.setCenter(results[0].geometry.location);
+            marker = new google.maps.Marker({
+            position: new google.maps.LatLng(locations[0], locations[1]),
+            map: map,
+            draggable : true,
+            url : homepage
+          }); //end marker
+          google.maps.event.addListener(marker, 'click', (function(marker) {
+            return function() {
+             var infoWindowContent = "<div><strong>Name:</strong></div>";
+                 infoWindowContent    += "<div>"+name+"</div>";
+                 infoWindowContent    += "<div><strong>Address:</strong></div>";
+                 infoWindowContent    += "<div>"+address+"</div>";
+                 infoWindowContent    += "<div><strong>Post_number:</strong></div>";
+                 infoWindowContent    += "<div>"+post_number+"</div>";
+                 infoWindowContent    += "<div><strong>Number:</strong></div>";
+                 infoWindowContent    += "<div>"+number+"</div>";
+                 infoWindowContent    += "<div><strong>Homepage:</strong></div>"
+                 infoWindowContent    += "<div><a href="+homepage+">"+homepage+"</a></div>";
+              infowindow.setContent(infoWindowContent);
+              infowindow.open(map, marker);
+            } //end function
+          })(marker)); //addListener end
+
+          if(marker)
+          {
+
+            marker.addListener('click', function() {
+              map.setZoom(15);
+              map.setCenter(this.getPosition());
+            });
+          }//end if
+        }//end if
+    }); //end geocoder
+  }//end function
+  google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+{% endblock %}

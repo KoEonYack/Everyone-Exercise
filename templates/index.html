@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>국민의 운동</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static "sticky-footer.css" %}" >
+    <link rel="stylesheet" href="{% static "main_css.css" %}" >
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="{% static "main_jss.js" %}"></script>
+</head>
+<body>
+<!-- Category -->
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active"> <!-- 활성 : nav-item active -->
+        <a class="nav-link" href="#">카테고리_1<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">카테고리_2</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">카테고리_3</a>
+      </li>
+    </ul>
+
+    <!-- Auth design -->
+    <ul class="navbar-nav navbar-right">
+    {% if user.is_authenticated %}
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url "profile" %}"}> {{ user }}</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url "logout" %}?next={{ request.path }}" onclick="return confirm('정말 로그아웃 하시겠습니까?');">로그아웃</a>
+      </li>
+    {% else %}
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url "signup" %}">회원가입</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url "login" %}?next={{ request.path }}">로그인</a>
+      </li>
+    {% endif %}
+    </ul>
+  </div>
+</nav>
+<!-- END OF MENU -->
+
+    <div class="box" style="background-color:red;">1</div>
+    <div class="box" style="background-color:orange;">2</div>
+    <div class="box" style="background-color:yellow;">3</div>
+    <div class="box" style="background-color:green;">4</div>
+
+
+    <footer class="footer">
+      <div class="container text-center">
+        <span class="text-muted">
+            &copy; Copyright 2019 제6회 개발보안 경진대회.
+            공개키와 비공개팀
+        </span>
+      </div>
+    </footer>
+
+</body>
+</html>

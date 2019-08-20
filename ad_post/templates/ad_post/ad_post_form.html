@@ -1,0 +1,16 @@
+{% extends "ad_post/layout.html" %}
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_field %}
+
+{% block content %}
+<br><br>
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.title | as_crispy_field }}
+    {{ form.content | as_crispy_field }}
+    {{ form.photo | as_crispy_field }}
+    <input type="submit" value="수정 완료" class="btn btn-primary" />
+</form>
+<br><br>
+{% endblock %}

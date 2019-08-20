@@ -1,0 +1,14 @@
+{% extends "blog/layout.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<br><br>
+    <h3>메시지 수정</h3>
+    <hr/>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.message | as_crispy_field }}
+    <input type="submit" class="btn btn-primary" value="덧글 수정" />
+</form>
+{% endblock %}
