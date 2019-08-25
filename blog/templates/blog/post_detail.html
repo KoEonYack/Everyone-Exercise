@@ -5,14 +5,30 @@
 
 {% block extra_head %}
     <link rel="stylesheet" href="{% static "ios_message.css" %}" >
-<style>
-
-</style>
-
+    <style>
+        .jumbotron {
+              background-image: url({% static 'images/post_back.JPG' %});
+              background-size: cover;
+              text-shadow: 1px 1px 2px black, 0 0 1em white, 0 0 0.1em white;
+              color: white;
+          }
+    </style>
 {% endblock %}
 
-{% block content %}
-    <br><br>
+{% block pure_content %}
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">{{ post.title }}</h1>
+          <p class="lead text-muted"></p>
+          <p>
+            <a href="#" class="btn btn-primary my-2">#{{ post.sport }}</a>
+            <a href="#" class="btn btn-primary my-2">{{ post.location }}</a>
+            <a href="#" class="btn btn-primary my-2">{{ post.people }}명 모집</a>
+              <a href="#" class="btn btn-primary my-2">일시: {{ post.duration }}</a>
+          </p>
+        </div>
+      </section>
+    <br>
     {% if messages %}
         {% for message in messages %}
             <div class="alert alert-{{ message.tags }}">
@@ -20,8 +36,10 @@
             </div>
         {% endfor %}
     {% endif %}
-    <h2>{{ post.title }}</h2>
-    <hr/>
+{% endblock %}
+
+{% block content %}
+
     {{ post.update_counter }}
     {{ post.content | linebreaks }}
     <hr/>
@@ -34,6 +52,7 @@
            class="btn btn-danger float-right">삭제</a>
     {% endif %}
     <!--a href="{% url "blog:comment_new" post.pk %}">덧글 작성</a-->
+    <br>
     <hr>
 
  <!--
@@ -65,9 +84,8 @@
                 <div class="incoming_msg">
                   <div class="received_msg">
                     <div class="received_withd_msg">
-                        {{ comment.author }}
                         <p>{{ comment.message }}</p>
-                        <small>by , </small>
+                        <small>by , {{ comment.author }}</small>
                         <a href="{% url "blog:comment_edit" post.pk  comment.pk %}">수정</a>
                         <span class="time_date"> {{ coment.created_at }}</span></div>
                     </div>
@@ -120,5 +138,8 @@
   </div>
 </div>
 {% endblock %}
+
+
 {% block extra_bottom %}
+
 {% endblock %}

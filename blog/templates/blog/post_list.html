@@ -1,7 +1,19 @@
 {% extends "blog/layout.html" %}
+{% load static %}
 
-{% block content %}
-    <br>
+{% block extra_head %}
+    <style>
+        .jumbotron {
+              background-image: url({% static 'images/together.JPG' %});
+              background-size: cover;
+              text-shadow: 1px 1px 2px black, 0 0 1em white, 0 0 0.1em white;
+              color: white;
+          }
+    </style>
+{% endblock %}
+
+{% block pure_content %}
+
     {% if messages %}
         {% for message in messages %}
             <div class="alert alert-{{ message.tags }}">
@@ -9,35 +21,57 @@
             </div>
         {% endfor %}
     {% endif %}
+
     <div class="jumbotron jumbotron-fluid">
       <div class="container">
         <h1 class="display-5">함께 운동해요</h1>
         <p class="lead">함께 운동하면 즐거움은 커집니다!</p>
       </div>
     </div>
-    <table class="table table-hover table-bordered">
-        <tbody>
-        <tr>
-            <th>번호</th>
+
+    <div style="padding-left: 10%; padding-right:10%">
+    <table class="table table-hover table-bordered" style="padding: 0rem">
+        <thead class="thead-light">
+        <tr class="text-center">
+            <th style="width:40px;">#</th>
+            <th style="width:100px;">모집여부</th>
             <th>글 제목</th>
-            <th>작성 일자</th>
-            <th>조회수</th>
+            <th style="width:110px;">모집 인원</th>
+            <th style="width:250px;">장소</th>
+            <th style="width:170px;">작성 일자</th>
+            <th style="width:120px;">글쓴이</th>
+            <th style="width:100px;">조회수</th>
         </tr>
+        </thead>
+        <tbody style="padding: 0px" >
             {% for post in post_list %}
-                <tr>
+                <tr class="text-center" style="padding: 3px" >
                     <td> {{ post.pk }}</td>
+                    <td>
+                        {% if post.finish %}
+                            <button type="button" class="btn btn-secondary">모집 완료</button>
+                        {% else %}
+                            <button type="button" class="btn btn-success">모집중</button>
+                        {% endif %}
+                    </td>
                     <td>
                         <a href="{% url "blog:post_detail" post.pk %}">
                             {{ post.title }}
                         </a>
                     </td>
+                    <td> {{ post.people }}</td>
+                    <td> {{ post.location }}</td>
                     <td> {{ post.created_at | date:"Y-m-d D"}}</td>
+                    <td> {{ post.author }} </td>
                     <td> {{ post.count }}</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <a href="{% url "blog:post_new" %}" class="btn btn-primary pull-right" >글 작성</a>
+    <div class="d-flex flex-row-reverse">
+        <a href="{% url "blog:post_new" %}" class="btn btn-primary right" >운동 모집</a>
+    </div>
+    </div>
     <br><br><br>
-{% endblock %}
+{% endblock pure_content %}

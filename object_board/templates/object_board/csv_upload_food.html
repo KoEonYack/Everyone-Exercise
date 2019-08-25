@@ -1,0 +1,14 @@
+{% extends "object_board/layout.html" %}
+
+{% block content %}
+<br><br><br>
+{{ food }}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label>파일을 업로드합니다.</label>
+    <input type="file" name="file">
+    <p> CSV파일만 업로드해 주세요</p>
+    <button type="submit">업로드</button>
+</form>
+
+{% endblock %}

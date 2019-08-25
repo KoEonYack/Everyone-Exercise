@@ -5,7 +5,8 @@
 
 {% block content %}
 <br><br>
-
+    <h1>회원가입</h1>
+    <hr/>
 <form action="" method="post">
     {% csrf_token %}
     {% for field in form %}
@@ -13,6 +14,9 @@
         {{ field | as_crispy_field }}
       </div>
      {% endfor %}
+
+<div class="d-flex flex-row-reverse">
     <input type="submit" class="btn btn-primary" value="가입하기"/>
+</div>
 </form>
 {% endblock %}

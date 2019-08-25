@@ -1,0 +1,22 @@
+{% extends "blog/layout.html" %}
+{% load static %}
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+
+{% block extra_head %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block pure_content %}
+<div style="height: 900px">
+<img src="{% static 'images/main_1.JPG' %}" style="width:100%; height: 800px;" />
+</div>
+<div style="height: 800px">
+
+<img src="{% static 'images/main_2.JPG' %}" style="width:100%; height: 900px;" />
+</div>
+{% endblock %}
+
+

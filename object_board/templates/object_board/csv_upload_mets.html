@@ -1,0 +1,14 @@
+{% extends "object_board/layout.html" %}
+
+{% block content %}
+
+{{ mets }}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label>Upload a file</label>
+    <input type="file" name="file">
+    <p> Only aceepts mets CSV files</p>
+    <button type="submit">Upload</button>
+</form>
+
+{% endblock %}

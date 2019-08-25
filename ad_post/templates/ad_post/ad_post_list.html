@@ -1,7 +1,19 @@
 {% extends "ad_post/layout.html" %}
 
-{% block content %}
-<br>
+{% block extra_head %}
+<style>
+    .jumbotron {
+          background-image: url({% static 'images/ad_post.JPG' %});
+          background-size: cover;
+          text-shadow: 1px 1px 2px black, 0 0 1em white, 0 0 0.1em white;
+          color: white;
+      }
+</style>
+{% endblock %}
+
+{% block pure_content %}
+
+
     {% if messages %}
         {% for message in messages %}
             <div class="alert alert-{{ message.tags }}">
@@ -15,17 +27,23 @@
         <p class="lead">우리 지역 체육 시설에 무슨 행사가 있을까요?</p>
       </div>
     </div>
-    <table  class="table table-hover table-bordered text-center">
-        <tbody>
-        <tr>
+
+<div style="padding-left: 10%; padding-right:10%">
+    <table class="table table-hover table-bordered text-center">
+        <thead class="thead-light">
+        <tr class="text-center">
             <th>번호</th>
+            <th>섬네일</th>
             <th>글 제목</th>
             <th>작성 일자</th>
             <th>작성자</th>
         </tr>
+        </thead>
+        <tbody style="padding: 3px" >
             {% for ad_post in ad_post_list %}
-                <tr>
+                <tr class="text-center">
                     <td> {{ ad_post.pk }}</td>
+                    <td><img src = "{{ ad_post.imageThumbnail.url}}"/></td>
                     <td>
                         <a href="{% url "ad_post:post_detail" ad_post.pk %}">
                             {{ ad_post.title }}
@@ -37,6 +55,10 @@
             {% endfor %}
         </tbody>
     </table>
-    <a href="{% url "ad_post:post_new" %}" class="btn btn-primary pull-right" >글 작성</a>
+
+    <div class="d-flex flex-row-reverse">
+        <a href="{% url "ad_post:post_new" %}" class="btn btn-primary pull-right" >글 작성</a>
+    </div>
+</div>
     <br><br><br>
-{% endblock %}
+{% endblock pure_content %}

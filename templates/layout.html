@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <title>국민의 운동</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -11,7 +11,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="{% url "root" %}">
+  <a class="navbar-brand" href="{% url "blog:main" %}">
       <img src="{% static "logo_menu.png" %}" width="30" height="30" class="d-inline-block align-top" alt="">
       국민의 운동
   </a>
@@ -22,6 +22,9 @@
 <!-- Category -->
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url "polls:search" %}">우리지역 운동시설</a>
+      </li>
       <li class="nav-item active"> <!-- 활성 : nav-item active -->
         <a class="nav-link" href="{% url "blog:post_list" %}">함께 운동해요<span class="sr-only">(current)</span></a>
       </li>
@@ -29,10 +32,7 @@
         <a class="nav-link" href="{% url "ad_post:post_list" %}">우리 지역 행사</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="#">[구현중]우리지역운동시설</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="#">[구현중]나의 Bio상태 보기</a>
+        <a class="nav-link" href="{% url "object_board:exercise" %}">목표세워 운동해요</a>
       </li>
     </ul>
 
@@ -43,7 +43,8 @@
         <a class="nav-link" href="{% url "profile" %}"}> {{ user }}</a>
       </li>
      <li class="nav-item active" >
-        <a class="nav-link" data-toggle="modal" data-target="#LogoutModal" href="{% url "logout" %}?next={{ request.path }}" >로그아웃</a>
+        <a class="nav-link" data-toggle="modal" data-target="#LogoutModal" href="{% url "logout" %}?next={{ request.path }}" >
+            로그아웃</a>
       </li>
     {% else %}
       <li class="nav-item active">
@@ -78,6 +79,10 @@
 <h1 class="mt-5">HEAD 테스트</h1> <br>
 </main>
 -->
+
+{% block pure_content %}
+{% endblock %}
+
 <div class="container">
 <div class="row">
 <div class="col-xl-12">

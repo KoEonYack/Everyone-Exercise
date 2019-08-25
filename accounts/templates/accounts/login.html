@@ -2,9 +2,13 @@
 {% load bootstrap4 %}
 {% load crispy_forms_tags %}
 
-{% block content %}
+{% block pure_content %}
+<div style="padding-left: 40%; padding-right:40%">
+
 
 <br><br>
+<h1>로그인</h1>
+<hr/>
 <form action="" method="POST">
 {% csrf_token %}
 <div class="form-group">
@@ -16,4 +20,5 @@
 <input type="submit" class="btn btn-primary justify-content-center"  value="로그인" />
 </form>
 
-{% endblock %}
+</div>
+{% endblock pure_content %}

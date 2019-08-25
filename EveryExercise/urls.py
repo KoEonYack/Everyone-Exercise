@@ -10,6 +10,7 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('ad_post/', include('ad_post.urls')),
     path('map/', include('polls.urls')),
+    path('obj/', include('object_board.urls')),
     path('', lambda req:redirect('blog:post_list'), name='root'),  # URL reverse
 ]
 

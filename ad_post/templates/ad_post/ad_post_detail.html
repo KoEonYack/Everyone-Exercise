@@ -14,9 +14,10 @@
             </div>
         {% endfor %}
     {% endif %}
-
+    {{ ad_post.update_counter }}
     <h2>{{ ad_post.title }}</h2>
-    <hr>
+    작성자: {{ ad_post.author }} | 조회수: {{ ad_post.count }} | 작성일: {{ ad_post.created_at }}
+    <hr/>
         <!-- 콘텐츠 -->
         {% if ad_post.photo %}
             <img src="{{ ad_post.photo.url }}" style="width:100%"/>

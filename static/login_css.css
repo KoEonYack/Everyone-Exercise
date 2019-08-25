@@ -1,52 +1,78 @@
-.login-container{
-    margin-top: 5%;
-    margin-bottom: 5%;
+html,body {
+	height: 100%;
+	padding-bottom: 30px;
 }
-.login-form-1{
-    padding: 5%;
-    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+
+section {
+    padding-top: 50px;
 }
-.login-form-1 h3{
-    text-align: center;
-    color: #333;
+
+body.my-login-page {
+	background-color: white;
+	font-size: 17px;
 }
-.login-form-2{
-    padding: 5%;
-    background: #0062cc;
-    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+
+.my-login-page .brand {
+	width: 130px;
+	height: 130px;
+	overflow: hidden;
+	border-radius: 50%;
+	margin: 10px auto;
+	margin: 20px auto;
+	box-shadow: 0 4px 8px rgba(0,0,0,.30);
+	position: relative;
+	z-index: 1;
 }
-.login-form-2 h3{
-    text-align: center;
-    color: #fff;
+
+.my-login-page .brand img {
+	width: 100%;
 }
-.login-container form{
-    padding: 10%;
+
+.my-login-page .card-wrapper {
+	width: 400px;
 }
-.btnSubmit
-{
-    width: 50%;
-    border-radius: 1rem;
-    padding: 1.5%;
-    border: none;
-    cursor: pointer;
+
+.my-login-page .card {
+	border-color: transparent;
+	box-shadow: 0 4px 8px rgba(0,0,0,.35);
 }
-.login-form-1 .btnSubmit{
-    font-weight: 600;
-    color: #fff;
-    background-color: #0062cc;
+
+.my-login-page .card.fat {
+	padding: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,.65);
 }
-.login-form-2 .btnSubmit{
-    font-weight: 600;
-    color: #0062cc;
-    background-color: #fff;
+
+.my-login-page .card .card-title {
+	margin-bottom: 20px;
 }
-.login-form-2 .ForgetPwd{
-    color: #fff;
-    font-weight: 600;
-    text-decoration: none;
+
+.my-login-page .form-control {
+	border-width: 2.3px;
 }
-.login-form-1 .ForgetPwd{
-    color: #0062cc;
-    font-weight: 600;
-    text-decoration: none;
+
+.my-login-page .form-group label {
+	width: 100%;
+}
+
+.my-login-page .btn.btn-block {
+	padding: 12px 10px;
+}
+
+
+
+@media screen and (max-width: 425px) {
+	.my-login-page .card-wrapper {
+		width: 90%;
+		margin: 0 auto;
+	}
+}
+
+@media screen and (max-width: 320px) {
+	.my-login-page .card.fat {
+		padding: 0;
+	}
+
+	.my-login-page .card.fat .card-body {
+		padding: 15px;
+	}
 }

@@ -1,59 +1,60 @@
+{% extends "accounts/layout.html" %}
 {% load static %}
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
 
-<!DOCTYPE html>
-<html lang="ko-kr">
-<head>
-    <meta charset="UTF-8">
-    <title>국민의 운동 - 로그인 페이지</title>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="{% static "login_css.css" %}" >
-</head>
-<body>
+{% block extra_head %}
+	<link rel="stylesheet" href="{% static "login_css.css" %}" />
+{% endblock %}
 
-<div class="container login-container">
-    <div class="row">
+{% block pure_content %}
 
-        <!--
-        <div class="col-md-6 login-form-1">
-            <h3>Login for Form 1</h3>
-            <form>
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Your Email *" value="" />
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Your Password *" value="" />
-                </div>
-                <div class="form-group">
-                    <input type="submit" class="btnSubmit" value="Login" />
-                </div>
-                <div class="form-group">
-                    <a href="#" class="ForgetPwd">Forget Password?</a>
-                </div>
-            </form>
-        </div>
-        -->
+<body class="my-login-page">
+	<section class="h-100" style="padding-bottom: 100px">
+		<div class="container h-100">
+			<div class="row justify-content-md-center h-100">
+				<div class="card-wrapper">
 
-        <div class="container">
-            <div class="center-block">
-            <div class="col-md-6 login-form-2">
-                <h3>Login for Form 2</h3>
-                <form>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Your Email *" value="" />
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Your Password *" value="" />
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" class="btnSubmit" value="Login" />
-                    </div>
-                </form>
-            </div>
-        </div>
-        </div>
-    </div>
-</div>
-</body>
-</html>
+                    <!-- here -->
+
+					<div class="card fat" >
+						<div class="card-body">
+
+                            <div class="brand">
+                                <img src="{% static "logo_menu.png" %}" alt="logo">
+                            </div>
+
+							<h3 align="center" class="card-title">계정 로그인</h3>
+							<form action="" method="POST" class="my-login-validation" novalidate=""> {% csrf_token %}
+								<div class="form-group">
+									{{ form.username | as_crispy_field }}
+								</div>
+								<div class="form-group">
+                                    {{ form.password | as_crispy_field }}
+								    <div class="invalid-feedback">
+								    	Password is required
+							    	</div>
+								</div>
+
+								<div class="form-group m-0">
+									<button type="submit" class="btn btn-primary btn-block">
+										로그인
+									</button>
+								</div>
+								<div class="mt-4 text-center">
+									계정이 없으신가요? <a href="register.html">회원가입하기</a>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}
+
+
+
+{% block extra_bottom %}
+	<script src="js/my-login.js"></script>
+{% endblock extra_bottom %}

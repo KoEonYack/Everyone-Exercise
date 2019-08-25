@@ -3,7 +3,6 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404, resolve_url
 from django.template.defaultfilters import truncatewords
 from django.contrib import messages
-from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView, CreateView
 from .forms import CommentForm, PostForm
 from .models import Ad_Post, Ad_Comment
@@ -23,7 +22,11 @@ def post_new(request):
         'form': form,
     })
 
-post_list = ListView.as_view(model=Ad_Post)
+class PostListView(ListView):
+    template_name = "ad_post/ad_post_list2.html"
+    model = Ad_Post
+
+post_list = PostListView.as_view()
 
 class PostDetailView(DetailView):
     model = Ad_Post
@@ -49,47 +52,6 @@ class PostUpdate(UpdateView):
 
 post_edit = PostUpdate.as_view()
 
-'''
-@login_required
-def comment_new(request, pk):
-    form_class = CommentForm
-    post = Ad_Post.objects.get(pk=pk)
-    if request.method == 'POST':
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.author = request.user
-            comment.post = Ad_Post.object.get(pk=pk)
-            comment.save()
-            return redirect('ad_post:post_detail', pk)
-    else:
-        form = CommentForm()
-    return render(request, 'ad_post:post_form', {
-        'form': form,
-    })
-'''
-
-
-'''
-class CommentCreateView(CreateView):
-    model = Ad_Comment
-    form_class = CommentForm
-
-    def form_valid(self, form):
-        #comment = form.save(commit=False)
-        #comment.post = Ad_Post.object.get(pk=self.kwargs['post_pk'])
-        comment = form.save(commit=False)
-        #comment.author = self.request.user
-        print(self.kwargs['post_pk'])
-        comment.post = get_object_or_404(Ad_Post, pk=post_pk)
-        #comment.save()
-        return super().form_valid(form)
-
-    def get_success_url(self):
-        return resolve_url(self.object.post)
-
-comment_new = CommentCreateView.as_view()
-'''
 def comment_new(request, post_pk):
     post = Ad_Post.objects.get(pk=post_pk)
     if request.method == 'POST':
@@ -131,8 +93,7 @@ def post_remove(request, pk):
     messages.success(request, '게시글을 삭제했습니다.')
     return redirect('ad_post:post_list')
 
-# 검증
-###############################################
+
 class CommentUpdateView(UpdateView):
     model = Ad_Comment
     form_class = CommentForm
@@ -142,13 +103,5 @@ class CommentUpdateView(UpdateView):
 
 comment_edit = CommentUpdateView.as_view()
 
-'''
-class PostDeleteView(DeleteView):
-    model = Ad_Post
-    template_name = ''
-    success_url = reverse_lazy('ad_post:post_list')
-
-post_delete = PostDeleteView.as_view()
-'''
-
-#####################################
+def test1(request):
+    return render(request, 'ad_post/ad_post_list2.html')

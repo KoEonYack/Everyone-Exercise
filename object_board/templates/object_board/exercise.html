@@ -1,0 +1,81 @@
+{% extends "blog/layout.html" %}
+{% load static %}
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+
+
+{% block extra_head %}
+<style>
+    .jumbotron {
+          background-image: url({% static 'images/road.JPG' %});
+          background-size: cover;
+          text-shadow: 1px 1px 2px black, 0 0 1em white, 0 0 0.1em white;
+          color: white;
+      }
+</style>
+{% endblock %}
+
+{% block pure_content %}
+    <div class="jumbotron jumbotron-fluid" style="background-color: #8c8c8c">
+      <div class="container">
+        <h1 class="display-5">목표세워 운동해요</h1>
+        <p class="lead">목표를 함께 이뤄가요</p>
+      </div>
+    </div>
+<div class="row">
+    <div class="col">
+
+
+<div style="padding-left: 10%; padding-right:10%">
+
+    <a href="{% url "object_board:score" %}" class="btn btn-secondary right" >운동량 검사하기</a>
+    <br>
+<hr/>
+
+    <table class="table table-hover table-bordered" style="padding: 3rem">
+        <thead class="thead-light">
+        <tr class="text-center">
+            <th style="width:20px;">#</th>
+            <th style="width:40px;">모집상황</th>
+            <th style="width:100px;">제목</th>
+            <th style="width:100px;">목표</th>
+            <th style="width:40px;">작성자</th>
+            <th style="width:40px;">조회수</th>
+        </tr>
+        </thead>
+        <tbody style="padding: 0px" >
+            {% for post in obpost_list  %}
+                <tr class="text-center" style="padding: 3px" >
+                    <td> {{ post.pk }}</td>
+                    <td>
+                        {% if post.finish %}
+                            <button type="button" class="btn btn-secondary">모집 완료</button>
+                        {% else %}
+                            <button type="button" class="btn btn-success">모집중</button>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url "object_board:post_detail" post.pk %}">
+                            {{ post.title }}
+                        </a>
+                    </td>
+                    <td>  {{ post.goal }}</td>
+                    <td> {{ post.author }} </td>
+                    <td> {{ post.count }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="d-flex flex-row-reverse">
+        <a href="{% url "object_board:post_new" %}" class="btn btn-primary right" >목표 올리기</a>
+    </div>
+    </div>
+    </div>
+</div>
+<br><br>
+{% endblock pure_content %}
+
+{% block extra_bottom %}
+
+{% endblock %}

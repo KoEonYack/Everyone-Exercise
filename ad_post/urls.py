@@ -10,6 +10,9 @@ app_name = 'ad_post'
 
 urlpatterns = [
     path('', views.post_list, name='post_list'),
+    path('test1/', views.test1, name='post_test1'),
+
+
     path('<int:pk>/', views.post_detail, name='post_detail'),
     path('new/', views.post_new, name='post_new'),
     path('<int:pk>/edit', views.post_edit, name='post_edit'),
@@ -17,5 +20,7 @@ urlpatterns = [
 
     path('<int:post_pk>/comments/new/', views.comment_new, name='comment_new'),
     path('<int:post_pk>/comments/<int:pk>/edit/', views.comment_edit, name='comment_edit'),
+
+
 ]
 

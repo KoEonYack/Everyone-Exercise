@@ -10,7 +10,7 @@ class Ad_Post(models.Model):
     content = models.TextField()
     count = models.IntegerField(default=0)
     photo = models.ImageField(blank=True, null=True)
-    image_thumbnail = ImageSpecField(source='image', processors=[ResizeToFill(120, 60)])
+    imageThumbnail = ImageSpecField(source='photo', processors=[ResizeToFill(80, 120)])
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
