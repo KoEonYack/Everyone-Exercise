@@ -13,31 +13,38 @@
 
 
 ### [2] 우리 지역 운동시설 
-![1-1](./img/1_1.jpg)
+![1-1](https://github.com/KoEonYack/Everyone-Exercise/blob/master/img/1_1.JPG)
 [서울시 공공체육시설 현황](http://data.seoul.go.kr/dataList/datasetView.do?infId=OA-1115&srvType=S&serviceKind=1&currentPageNo=1)의 CSV파일의 정보의 일부를 데이터베이스에 저장했습니다. 
 
-![1-2](./img/1_2.jpg)
+![1-2](https://github.com/KoEonYack/Everyone-Exercise/blob/master/img/1_2.JPG)
 체육 시설을 선택하면 다음과 같은 페이지가 나옵니다.(50%로 축소) 별점과 코멘트를 작성할 수 있습니다. 이를 통해 해당 시설이 어떤지 평을 하여 추후에 이용하는 사람들에게 정보를 제공해 주며, 시설 관리자들이 해당 시설을 개선하는데 여론 수렴의 역할을 할 것입니다. 
 
 
 ### [3] 함께 운동해요
-![2-1](./img/2_1.jpg)
+![2-1](https://github.com/KoEonYack/Everyone-Exercise/blob/master/img/2_1.JPG)
 운동할 사람을 모집하기 위해 지역 단톡방 혹은 동호회에서 모집합니다. 이는 체계적으로 모집하기 힘듭니다. 이러한 문제를 해결하고자 함께 운동할 사람을 모집할 수 있는 페이지입니다. 
 
-![2-1](./img/2_2.jpg)
+![2-2](https://github.com/KoEonYack/Everyone-Exercise/blob/master/img/2_2.JPG)
 게시글을 클릭하면 다음과 같은 페이지가 나옵니다. 덧글을 iMessage와 유사하게 디자인함으로 마치 체팅방에서 대화를 나누는 경험을 선사합니다. 
 
 ### [4] 우리지역 행사
-![3-1](./img/3_1.jpg)
+![3-1](https://github.com/KoEonYack/Everyone-Exercise/blob/master/img/3_1.JPG)
 지역에는 크고 작은 수 많은 행사가 열립니다. 다만 관심이 없으면 그냥 지나가버리기 마련입니다. 이러한 문제를 해결하고자 한번에 행사를 모아서 보는 페이지를 제작하였습니다. 메트로 UI와 보여지는 정보를 최소화 함으로써 한 눈에 보여주고자 하였습니다. 
 
 
+### [5] 운동량 계산
+![4-1](https://github.com/KoEonYack/Everyone-Exercise/blob/master/img/4_1.JPG)
+자신이 먹은 음식을 선택할 수 있습니다. 
+
+![4-2](https://github.com/KoEonYack/Everyone-Exercise/blob/master/img/4_2.JPG)
+하고 싶은 운동과 몸무게를 입력하면 자신이 먹은 음식의 칼로리를 소모하기 위해서 얼마만큼의 운동을 해야 하는 지 알려줍니다.  
+
 ### [5] 계정
 
-![1-1](./img/login.jpg)
+![login](https://github.com/KoEonYack/Everyone-Exercise/blob/master/img/login.JPG)
 로그인 페이지 
 
-![1-1](./img/register.jpg)
+![register](https://github.com/KoEonYack/Everyone-Exercise/blob/master/img/register.JPG)
 회원가입 페이지
 
 
